@@ -1,20 +1,19 @@
 package com.example.news.data.repository
 
-import android.util.Log
+import com.example.core.config.AppConfig
 import com.example.news.data.api.NewsApi
-import com.example.news.domain.News
-import com.example.news.domain.NewsRepository
-import com.example.news.domain.toDomain
+import com.example.news.domain.model.News
+import com.example.news.domain.repository.NewsRepository
+import com.example.news.domain.mapper.toDomain
 
 class NewsRepositoryImpl(
-    private val api: NewsApi
+    private val api: NewsApi,
+    private val config: AppConfig
 ) : NewsRepository {
 
-    override suspend fun getHeadlines(): Result<News> = try {
-        val response = api.getNews()
-        Log.d("NEWS_API", "articles size = ${response.articleResponses.size}")
-        Result.success(response.toDomain())
-    } catch (t: Throwable) {
-        Result.failure(t)
+    override suspend fun getHeadlines(): Result<News> = runCatching {
+        api.getNews(
+            country = config.newsCountry
+        ).toDomain()
     }
 }

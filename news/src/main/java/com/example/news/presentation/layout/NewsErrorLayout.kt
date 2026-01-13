@@ -10,10 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.designsystem.LocalSpacing
 import com.example.designsystem.NewsTheme
+import com.example.news.R
 
 @Composable
 fun NewsErrorLayout(
@@ -30,7 +32,7 @@ fun NewsErrorLayout(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Oops!",
+            text = stringResource(R.string.oops),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.error
         )
@@ -44,7 +46,7 @@ fun NewsErrorLayout(
         )
 
         Button(onClick = onRetry) {
-            Text("Retry")
+            Text(stringResource(R.string.retry))
         }
     }
 }

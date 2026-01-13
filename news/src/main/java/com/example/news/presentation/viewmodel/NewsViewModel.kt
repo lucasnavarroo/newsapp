@@ -2,7 +2,7 @@ package com.example.news.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.news.domain.NewsRepository
+import com.example.news.domain.repository.NewsRepository
 import com.example.news.presentation.mapper.toUi
 import com.example.news.presentation.viewmodel.event.NewsEvent
 import com.example.news.presentation.viewmodel.intent.NewsIntent
@@ -29,31 +29,25 @@ class NewsViewModel(
     val event: SharedFlow<NewsEvent> = _event
 
     init {
-        onIntent(NewsIntent.OnLoad())
+        onIntent(NewsIntent.OnLoad)
     }
 
     fun onIntent(intent: NewsIntent) {
         when (intent) {
             is NewsIntent.OnLoad ->
-                loadNews(isRefreshing = intent.isRefreshing)
+                loadNews()
 
             is NewsIntent.OnArticleClick ->
                 emit(NewsEvent.OpenArticle(intent.article))
         }
     }
 
-    private fun loadNews(isRefreshing: Boolean) {
+    private fun loadNews() {
         viewModelScope.launch {
-
-            if (isRefreshing) {
-                _state.update { it.copy(isRefreshing = true) }
-            } else {
-                _state.update {
-                    it.copy(
-                        screenType = NewsState.ScreenType.Loading,
-                        isRefreshing = false
-                    )
-                }
+            _state.update {
+                it.copy(
+                    screenType = NewsState.ScreenType.Loading,
+                )
             }
 
             repository.getHeadlines()
@@ -68,7 +62,6 @@ class NewsViewModel(
                                 else
                                     NewsState.ScreenType.Success,
                             providers = providersUi,
-                            isRefreshing = false
                         )
                     }
                 }
@@ -76,13 +69,11 @@ class NewsViewModel(
                     _state.update {
                         it.copy(
                             screenType = NewsState.ScreenType.Error,
-                            isRefreshing = false
                         )
                     }
                 }
         }
     }
-
 
     private fun emit(event: NewsEvent) {
         _event.tryEmit(event)

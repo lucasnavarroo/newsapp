@@ -39,7 +39,7 @@ fun NavGraphBuilder.newsGraph(navController: NavController) {
                 ?.savedStateHandle
                 ?.get<ArticleUi>(ARTICLE)
 
-        article?.let { it ->
+        article?.let {
             NewsDetailScreen(
                 article = it,
                 onBack = { navController.popBackStack() }

@@ -22,11 +22,18 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "NEWS_API_KEY", "\"${getLocalProperty("NEWS_API_KEY")}\"")
+            buildConfigField(
+                "String",
+                "NEWS_API_KEY",
+                "\"90d025cc20c54bb282c001df1dcdca25\""
+            )
         }
         release {
-            isMinifyEnabled = false
-            buildConfigField("String", "NEWS_API_KEY", "\"${getLocalProperty("NEWS_API_KEY")}\"")
+            buildConfigField(
+                "String",
+                "NEWS_API_KEY",
+                "\"90d025cc20c54bb282c001df1dcdca25\""
+            )
         }
     }
 
@@ -41,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlinx.serialization.converter)
     implementation(libs.kotlinx.serialization.json)

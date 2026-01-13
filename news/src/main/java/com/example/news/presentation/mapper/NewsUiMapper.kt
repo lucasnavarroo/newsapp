@@ -1,8 +1,8 @@
 package com.example.news.presentation.mapper
 
 import com.example.core.presentation.toUiDateString
-import com.example.news.domain.Article
-import com.example.news.domain.News
+import com.example.news.domain.model.Article
+import com.example.news.domain.model.News
 import com.example.news.presentation.model.ArticleUi
 import com.example.news.presentation.model.NewsProviderUi
 

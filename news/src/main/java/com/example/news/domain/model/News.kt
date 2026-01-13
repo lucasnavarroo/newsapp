@@ -1,4 +1,4 @@
-package com.example.news.domain
+package com.example.news.domain.model
 
 import java.time.Instant
 

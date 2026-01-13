@@ -39,7 +39,6 @@ android {
 }
 
 dependencies {
-
     implementation(project(":designsystem"))
     implementation(project(":core"))
 

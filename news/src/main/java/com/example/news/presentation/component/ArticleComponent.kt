@@ -3,6 +3,7 @@ package com.example.news.presentation.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -13,16 +14,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.example.designsystem.LocalSpacing
 import com.example.designsystem.NewsTheme
-import com.example.news.R.drawable.error_loading
+import com.example.designsystem.component.ImagePlaceholder
+import com.example.designsystem.component.LoadingSkeleton
 import com.example.news.presentation.model.ArticleUi
 
 @Composable
@@ -39,28 +42,44 @@ fun ArticleComponent(
             .clickable { onOpenDetails() }
     ) {
         Column {
-            item.imageUrl?.let { imageUrl ->
-                AsyncImage(
+            val imageModifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+
+            if (item.imageUrl.isNullOrBlank()) {
+                ImagePlaceholder(modifier = imageModifier)
+            } else {
+                SubcomposeAsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(imageUrl)
+                        .data(item.imageUrl)
                         .crossfade(true)
                         .diskCachePolicy(CachePolicy.ENABLED)
                         .memoryCachePolicy(CachePolicy.ENABLED)
                         .build(),
-                    error = painterResource(error_loading),
                     contentDescription = item.title,
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(180.dp)
-                )
+                    contentScale = ContentScale.Crop,
+                    modifier = imageModifier
+                ) {
+                    when (painter.state) {
+                        is AsyncImagePainter.State.Loading -> {
+                            LoadingSkeleton(modifier = Modifier.fillMaxSize())
+                        }
+
+                        is AsyncImagePainter.State.Error -> {
+                            ImagePlaceholder(modifier = Modifier.fillMaxSize())
+                        }
+
+                        else -> {
+                            SubcomposeAsyncImageContent()
+                        }
+                    }
+                }
             }
 
             Column(
                 modifier = Modifier.padding(spacing.twelve),
                 verticalArrangement = Arrangement.spacedBy(spacing.spaceSmall)
             ) {
-
                 Text(
                     text = item.title,
                     maxLines = 2,
@@ -79,7 +98,8 @@ fun ArticleComponent(
                 }
 
                 Text(
-                    text = item.author?.let { "$it - ${item.publishedAt}" } ?: item.publishedAt,
+                    text = item.author?.let { "$it • ${item.publishedAt}" }
+                        ?: item.publishedAt,
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

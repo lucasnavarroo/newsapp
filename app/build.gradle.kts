@@ -1,8 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
+    alias(libs.plugins.kotlin.compose)
     id("kotlin-parcelize")
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 android {
@@ -29,22 +33,40 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+
+    flavorDimensions += "news"
+    productFlavors {
+        create("pt") {
+            dimension = "news"
+            applicationIdSuffix = ".pt"
+            versionNameSuffix = "-pt"
+
+            buildConfigField(
+                "String",
+                "NEWS_COUNTRY",
+                "\"pt\""
+            )
+        }
+
+        create("us") {
+            dimension = "news"
+            applicationIdSuffix = ".us"
+            versionNameSuffix = "-us"
+
+            buildConfigField(
+                "String",
+                "NEWS_COUNTRY",
+                "\"us\""
+            )
+        }
     }
 }
 
 dependencies {
-
     implementation(project(":core"))
     implementation(project(":designsystem"))
     implementation(project(":news"))

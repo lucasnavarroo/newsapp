@@ -14,8 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.news.R
-import com.example.news.navigation.NewsNavArgs
-import com.example.news.navigation.NewsRoute
 import com.example.news.navigation.navigateToNewsDetails
 import com.example.news.presentation.layout.NewsEmptyLayout
 import com.example.news.presentation.layout.NewsErrorLayout
@@ -68,7 +66,7 @@ fun NewsScreen(
 
                 NewsState.ScreenType.Error -> {
                     NewsErrorLayout(
-                        onRetry = { viewModel.onIntent(NewsIntent.OnLoad()) }
+                        onRetry = { viewModel.onIntent(NewsIntent.OnLoad) }
                     )
                 }
 

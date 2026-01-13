@@ -1,4 +1,4 @@
-package com.example.core.network
+package com.example.core.di
 
 import com.example.core.BuildConfig
 import okhttp3.OkHttpClient
