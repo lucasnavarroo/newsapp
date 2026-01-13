@@ -31,5 +31,6 @@ fun ArticleResponse.toDomain(): Article =
         description = description,
         imageUrl = imageUrl,
         publishedAt = publishedAt.toInstantOrNull() ?: Instant.MIN,
-        url = url
+        url = url,
+        content = content,
     )

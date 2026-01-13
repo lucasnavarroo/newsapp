@@ -21,5 +21,7 @@ fun Article.toUi(): ArticleUi =
         imageUrl = imageUrl,
         publishedAt = publishedAt.toUiDateString(),
         provider = provider,
-        url = url
+        url = url,
+        content = content,
+        author = author,
     )

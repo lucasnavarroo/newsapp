@@ -28,13 +28,17 @@ class NewsViewModel(
     )
     val event: SharedFlow<NewsEvent> = _event
 
+    init {
+        onIntent(NewsIntent.OnLoad())
+    }
+
     fun onIntent(intent: NewsIntent) {
         when (intent) {
             is NewsIntent.OnLoad ->
                 loadNews(isRefreshing = intent.isRefreshing)
 
             is NewsIntent.OnArticleClick ->
-                emit(NewsEvent.OpenArticle(intent.url))
+                emit(NewsEvent.OpenArticle(intent.article))
         }
     }
 

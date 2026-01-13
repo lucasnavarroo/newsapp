@@ -9,10 +9,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.designsystem.LocalSpacing
 import com.example.designsystem.NewsTheme
+import com.example.news.R
 
 @Composable
 fun NewsEmptyLayout() {
@@ -26,13 +28,13 @@ fun NewsEmptyLayout() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "No News Available",
+            text = stringResource(R.string.empty_layout_no_news_available),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface
         )
 
         Text(
-            text = "There are no news articles to display at the moment. Please check back later.",
+            text = stringResource(R.string.empty_layout_no_news_description),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = spacing.spaceSmall),
             textAlign = TextAlign.Center,

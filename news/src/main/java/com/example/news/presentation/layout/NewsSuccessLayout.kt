@@ -43,7 +43,7 @@ fun NewsSuccessLayout(
                     item = article,
                     onOpenDetails = {
                         onIntent(
-                            NewsIntent.OnArticleClick(article.url)
+                            NewsIntent.OnArticleClick(article)
                         )
                     }
                 )
@@ -68,18 +68,22 @@ private fun NewsSuccessLayoutPreview() {
                             ArticleUi(
                                 title = "AI Advances in 2024",
                                 subtitle = "Latest breakthroughs in artificial intelligence",
-                                provider = "TechCrunch",
+                                imageUrl = "https://via.placeholder.com/400x300",
                                 publishedAt = "2 hours ago",
                                 url = "https://example.com/article1",
-                                imageUrl = "https://via.placeholder.com/400x300"
+                                provider = "TechCrunch",
+                                content = "",
+                                author = "Jane Smith",
                             ),
                             ArticleUi(
                                 title = "New Programming Languages",
                                 subtitle = "Exploring emerging languages",
-                                provider = "TechCrunch",
+                                imageUrl = "https://via.placeholder.com/400x300",
                                 publishedAt = "4 hours ago",
                                 url = "https://example.com/article2",
-                                imageUrl = "https://via.placeholder.com/400x300"
+                                provider = "TechCrunch",
+                                content = "",
+                                author = "Jane Smith",
                             )
                         )
                     ),
@@ -89,10 +93,12 @@ private fun NewsSuccessLayoutPreview() {
                             ArticleUi(
                                 title = "Latest Tech Gadgets",
                                 subtitle = "The best devices of the season",
-                                provider = "The Verge",
+                                imageUrl = "https://via.placeholder.com/400x300",
                                 publishedAt = "1 hour ago",
                                 url = "https://example.com/article3",
-                                imageUrl = "https://via.placeholder.com/400x300"
+                                provider = "The Verge",
+                                content = "",
+                                author = "Jane Smith",
                             )
                         )
                     )

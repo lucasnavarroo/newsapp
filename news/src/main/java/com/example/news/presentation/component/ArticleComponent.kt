@@ -16,15 +16,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import coil.compose.AsyncImage
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.example.designsystem.LocalSpacing
 import com.example.designsystem.NewsTheme
-import com.example.news.presentation.model.ArticleUi
 import com.example.news.R.drawable.news_placeholder
-import com.example.news.R.drawable.error_loading
+import com.example.news.presentation.model.ArticleUi
 
 @Composable
 fun ArticleComponent(
@@ -49,7 +48,6 @@ fun ArticleComponent(
                         .memoryCachePolicy(CachePolicy.ENABLED)
                         .build(),
                     placeholder = painterResource(news_placeholder),
-                    error = painterResource(error_loading),
                     contentDescription = item.title,
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
@@ -81,7 +79,7 @@ fun ArticleComponent(
                 }
 
                 Text(
-                    text = item.publishedAt,
+                    text = item.author?.let { "$it - ${item.publishedAt}" } ?: item.publishedAt,
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -99,10 +97,12 @@ private fun ArticleComponentPreview() {
             item = ArticleUi(
                 title = "Breaking News: Major Event Unfolds in the City",
                 subtitle = "Details are emerging about a significant event that has taken place in the downtown area.",
-                provider = "News Provider",
+                imageUrl = "",
                 publishedAt = "2 hours ago",
                 url = "https://example.com/article",
-                imageUrl = "",
+                provider = "News Provider",
+                content = "",
+                author = "John Doe",
             ),
             onOpenDetails = {}
         )

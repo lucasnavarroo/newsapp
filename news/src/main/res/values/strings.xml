@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="news_top_bar_title">News App</string>
+    <string name="empty_layout_no_news_available">No News Available</string>
+    <string name="empty_layout_no_news_description">There are no news articles to display at the moment. Please check back later.</string>
+    <string name="loading_news">Loading news...</string>
+    <string name="details_top_bar_title">Details</string>
+    <string name="details_back_content_description">Back</string>
+    <string name="details_button_open_article">Open Article</string>
 </resources>

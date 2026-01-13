@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                             navController = navController,
                             startDestination = NewsRoute.ROOT,
                         ) {
-                            newsGraph()
+                            newsGraph(navController)
                         }
                     }
                 }

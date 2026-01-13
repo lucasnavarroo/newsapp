@@ -18,5 +18,6 @@ data class Article(
     val description: String?,
     val imageUrl: String?,
     val publishedAt: Instant,
-    val url: String
+    val url: String,
+    val content: String?,
 )

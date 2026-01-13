@@ -12,7 +12,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.news.R
+import com.example.news.navigation.NewsNavArgs
+import com.example.news.navigation.NewsRoute
+import com.example.news.navigation.navigateToNewsDetails
 import com.example.news.presentation.layout.NewsEmptyLayout
 import com.example.news.presentation.layout.NewsErrorLayout
 import com.example.news.presentation.layout.NewsLoadingLayout
@@ -25,19 +29,20 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsScreen(viewModel: NewsViewModel = koinViewModel()) {
+fun NewsScreen(
+    navController: NavController,
+    viewModel: NewsViewModel = koinViewModel()
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.event.collect { event ->
             when (event) {
-                is NewsEvent.OpenArticle -> {}
+                is NewsEvent.OpenArticle -> {
+                    navController.navigateToNewsDetails(event.article)
+                }
             }
         }
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.onIntent(NewsIntent.OnLoad())
     }
 
     Scaffold(

@@ -10,9 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.designsystem.LocalSpacing
 import com.example.designsystem.NewsTheme
+import com.example.news.R
 
 @Composable
 fun NewsLoadingLayout() {
@@ -28,7 +30,7 @@ fun NewsLoadingLayout() {
         CircularProgressIndicator()
 
         Text(
-            text = "Loading news...",
+            text = stringResource(R.string.loading_news),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = spacing.spaceMedium),
             color = MaterialTheme.colorScheme.onSurface
