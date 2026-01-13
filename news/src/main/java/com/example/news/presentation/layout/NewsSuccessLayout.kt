@@ -9,13 +9,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.designsystem.LocalSpacing
-import com.example.designsystem.NewsTheme
 import com.example.news.presentation.component.ArticleComponent
 import com.example.news.presentation.component.ProviderHeaderComponent
-import com.example.news.presentation.model.ArticleUi
-import com.example.news.presentation.model.NewsProviderUi
 import com.example.news.presentation.viewmodel.intent.NewsIntent
 import com.example.news.presentation.viewmodel.state.NewsState
 
@@ -33,11 +29,16 @@ fun NewsSuccessLayout(
     ) {
         state.providers.forEach { provider ->
             stickyHeader(key = provider.name) {
-                ProviderHeaderComponent(name = provider.name)
+                ProviderHeaderComponent(
+                    name = provider.name,
+                )
             }
+
             items(
                 items = provider.articles,
-                key = { it.url + it.publishedAt }
+                key = { article ->
+                    article.url + article.publishedAt
+                }
             ) { article ->
                 ArticleComponent(
                     item = article,
@@ -55,6 +56,8 @@ fun NewsSuccessLayout(
     }
 }
 
+
+/*
 @PreviewLightDark
 @Composable
 private fun NewsSuccessLayoutPreview() {
@@ -101,4 +104,4 @@ private fun NewsSuccessLayoutPreview() {
             onIntent = {}
         )
     }
-}
+}*/

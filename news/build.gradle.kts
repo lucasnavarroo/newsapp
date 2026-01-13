@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.ui.test.junit4.android)
+    implementation(libs.androidx.paging.common.android)
+    implementation(libs.androidx.paging.compose.android)
     debugImplementation(libs.androidx.ui.tooling)
 
     implementation(libs.androidx.lifecycle.runtime.ktx)
