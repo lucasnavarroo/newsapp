@@ -1,7 +1,6 @@
 package com.example.newsapp
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.core.biometric.BiometricAuthenticator
 import com.example.core.network.networkModule
 import com.example.designsystem.Dimensions
 import com.example.designsystem.LocalSpacing
@@ -22,7 +23,8 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,14 +39,29 @@ class MainActivity : ComponentActivity() {
         }
 
         enableEdgeToEdge()
+
+        BiometricAuthenticator(this)
+            .authenticateIfAvailable(
+                title = getString(R.string.biometric_title),
+                subtitle = getString(R.string.biometric_subtitle),
+                negativeButtonText = getString(R.string.biometric_cancel),
+                onAuthenticated = { startAppNormally() },
+                onUserCancelled = { finish() }
+            )
+    }
+
+    private fun startAppNormally() {
         setContent {
             val navController = rememberNavController()
             NewsTheme {
                 CompositionLocalProvider(LocalSpacing provides Dimensions()) {
-                    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
                         NavHost(
                             navController = navController,
-                            startDestination = NewsRoute.ROOT,
+                            startDestination = NewsRoute.ROOT
                         ) {
                             newsGraph(navController)
                         }

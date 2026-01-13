@@ -1,10 +1,10 @@
 package com.example.news.presentation.mapper
 
+import com.example.core.presentation.toUiDateString
 import com.example.news.domain.Article
 import com.example.news.domain.News
 import com.example.news.presentation.model.ArticleUi
 import com.example.news.presentation.model.NewsProviderUi
-import com.example.news.toUiDateString
 
 fun News.toUi(): List<NewsProviderUi> =
     providers.map { provider ->
@@ -19,7 +19,7 @@ fun Article.toUi(): ArticleUi =
         title = title,
         subtitle = description,
         imageUrl = imageUrl,
-        publishedAt = publishedAt.toUiDateString(),
+        publishedAt = publishedAt.toUiDateString(pattern = "d MMM yyyy 'at' h:mm a"),
         provider = provider,
         url = url,
         content = content,

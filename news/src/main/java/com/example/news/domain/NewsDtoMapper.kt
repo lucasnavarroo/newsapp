@@ -1,10 +1,9 @@
 package com.example.news.domain
 
+import com.example.core.presentation.toInstantOrNull
 import com.example.news.data.model.ArticleResponse
 import com.example.news.data.model.NewsResponse
-import com.example.news.toInstantOrNull
 import java.time.Instant
-
 fun NewsResponse.toDomain(): News {
     val articles = articleResponses.map { it.toDomain() }
 

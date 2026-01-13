@@ -22,7 +22,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.example.designsystem.LocalSpacing
 import com.example.designsystem.NewsTheme
-import com.example.news.R.drawable.news_placeholder
+import com.example.news.R.drawable.error_loading
 import com.example.news.presentation.model.ArticleUi
 
 @Composable
@@ -47,7 +47,7 @@ fun ArticleComponent(
                         .diskCachePolicy(CachePolicy.ENABLED)
                         .memoryCachePolicy(CachePolicy.ENABLED)
                         .build(),
-                    placeholder = painterResource(news_placeholder),
+                    error = painterResource(error_loading),
                     contentDescription = item.title,
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier

@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.androidx.biometric)
 }
 
 fun getLocalProperty(key: String): String {
