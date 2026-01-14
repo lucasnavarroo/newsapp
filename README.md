@@ -4,7 +4,7 @@ Android app that displays top headlines using **NewsAPI**.
 
 Built with **Kotlin**, **Jetpack Compose**, **MVVM**, and **Clean Architecture**.
 
-## ▶️ Recommended Build Variant: usDebug flavor.
+## ▶️ Recommended Build Variant: **usDebug** flavor.
 
 ---
 
@@ -50,4 +50,8 @@ For evaluation purposes, the NewsAPI key is **hardcoded** so the app runs out-of
 
 - Images loaded & cached with **Coil**
 - Biometric auth is skipped if unsupported
-- Flavors automatically change news source
+- Flavors automatically change news country source
+
+---
+
+https://github.com/user-attachments/assets/e6137af4-937a-4724-8b6a-1e1af3189ce8
