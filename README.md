@@ -4,7 +4,7 @@ Android app that displays top headlines using **NewsAPI**.
 
 Built with **Kotlin**, **Jetpack Compose**, **MVVM**, and **Clean Architecture**.
 
-## ▶️ Recommended Build Variant: **`usDebug`** flavor.
+## ▶️ Recommended Build Variant: usDebug flavor.
 
 ---
 
